@@ -1,0 +1,17 @@
+#!/ust/bin/stap
+
+probe syscall.read {
+    if (pid() == $1 || pid() == $2) {
+        system("sleep 0.1");
+        system(sprintf("printf \"Proceso %d: %s (\" && date +\"%%Y-%%m-%%d %%H:%%M:%%S\" && printf \")\\n\"", pid(), name))
+        system("sleep 0.1");
+    }
+}
+
+probe syscall.write {
+    if (pid() == $1 || pid() == $2) {
+        system("sleep 0.1");
+        system(sprintf("printf \"Proceso %d: %s (\" && date +\"%%Y-%%m-%%d %%H:%%M:%%S\" && printf \")\\n\"", pid(), name))
+        system("sleep 0.1");
+    }
+}

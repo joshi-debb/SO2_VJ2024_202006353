@@ -1,0 +1,37 @@
+.tabla-container {
+    margin: 20px;
+  }
+  
+  .tabla {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .tabla th, .tabla td {
+    border: 1px solid #000000;
+    padding: 8px;
+  }
+  
+  .tabla th {
+    background-color: #000000;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .tabla tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .tabla tr:hover {
+    background-color: #ddd;
+  }
+  
+  
+.scroleados{
+  white-space: nowrap;
+  width: 600px;
+  height: calc(100vh - 300px);
+  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
+}

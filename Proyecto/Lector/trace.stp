@@ -1,0 +1,28 @@
+
+global pid = 0;
+global llamada = "";
+global nombre = "";
+global size = 0;
+global tiempo = 0;
+
+probe syscall.mmap2 {
+        llamada = name;
+        pid = pid();
+        nombre = execname();
+        size = length;
+        tiempo = gettimeofday_s();
+}
+
+probe syscall.munmap {
+        llamada = name;
+        pid = pid();
+        nombre = execname();
+        size = length;
+        tiempo = gettimeofday_s();
+}
+
+probe timer.ms(250){
+       if(pid != 0 ){
+               system(sprintf("printf '%s,%d,%s,%d,%d' && ps -o %%mem -p %d | awk 'NR==2 {print $1}'| tr -d '\n' ",llamada, pid, nombre, size, tiempo, pid));
+       }
+}
